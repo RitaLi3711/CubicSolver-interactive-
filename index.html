@@ -4,77 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cubic Formula</title>
-    <script type="module" src="./src/main.ts"></script>
-    <link rel="stylesheet" href="./src/style.css" />
+    <title>Cubic Solver</title>
   </head>
-
   <body>
-    <h1 class="page-title">Cubic Solver</h1>
-
-    <!-- input section -->
-    <div class="input-row">
-      <div class="input-group">
-        <h2 class="input-title">a-value:</h2>
-        <input type="number" id="a-value" step="any" value="0" />
-      </div>
-
-      <div class="input-group">
-        <h2 class="input-title">b-value:</h2>
-        <input type="number" id="b-value" step="any" value="0" />
-      </div>
-
-      <div class="input-group">
-        <h2 class="input-title">c-value:</h2>
-        <input type="number" id="c-value" step="any" value="0" />
-      </div>
-
-      <div class="input-group">
-        <h2 class="input-title">d-value:</h2>
-        <input type="number" id="d-value" step="any" value="0" />
-      </div>
-
-      <button id="solve-button">Solve Cubic</button>
-    </div>
-
-    <!-- output section -->
-    <div class="equation-display" id="equation-display">
-      <h2 id="equation-text">0x³ + 0x² + 0x + 0 = 0</h2>
-    </div>
-
-    <div class="content-row">
-      <table class="result-box">
-        <tr class="result-row">
-          <th class="result-title">p</th>
-          <td class="value-display" id="p-value"></td>
-        </tr>
-        <tr class="result-row">
-          <th class="result-title">q</th>
-          <td class="value-display" id="q-value"></td>
-        </tr>
-        <tr class="result-row">
-          <th class="result-title">Discriminant</th>
-          <td class="value-display" id="disc-value"></td>
-        </tr>
-        <tr class="result-row values-row">
-          <th class="result-title">Values</th>
-          <td class="values-header"><span>x</span> <span>y</span></td>
-        </tr>
-        <tr class="result-row">
-          <th class="result-title">Root 1</th>
-          <td class="value-display" id="root1-value"></td>
-        </tr>
-        <tr class="result-row">
-          <th class="result-title">Root 2</th>
-          <td class="value-display" id="root2-value"></td>
-        </tr>
-        <tr class="result-row">
-          <th class="result-title">Root 3</th>
-          <td class="value-display" id="root3-value"></td>
-        </tr>
-      </table>
-
-      <canvas id="graph" width="600" height="400"></canvas>
-    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
