@@ -50,11 +50,11 @@ const formatRoot = (r: number | string) => {
 };
 
 function App() {
-  const [a, setA] = useState(0);
+  const [a, setA] = useState(1);
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
   const [d, setD] = useState(0);
-  const [equationText, setEquationText] = useState('0x³ + 0x² + 0x + 0 = 0');
+  const [equationText, setEquationText] = useState('1x³ + 0x² + 0x + 0 = 0');
   const [pValue, setPValue] = useState('');
   const [qValue, setQValue] = useState('');
   const [discValue, setDiscValue] = useState('');
@@ -135,11 +135,7 @@ function App() {
     });
   };
 
-  useEffect(() => {
-    drawGrid();
-  }, []);
-
-  const handleSolve = () => {
+  const updateResults = () => {
     if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
       setEquationText('no blanks in input');
       drawGrid();
@@ -185,6 +181,26 @@ function App() {
     drawFunction(a, b, c, d, roots);
   };
 
+  useEffect(() => {
+    updateResults();
+  }, [a, b, c, d]);
+
+  const handleAChange = (value: number) => {
+    setA(value);
+  };
+
+  const handleBChange = (value: number) => {
+    setB(value);
+  };
+
+  const handleCChange = (value: number) => {
+    setC(value);
+  };
+
+  const handleDChange = (value: number) => {
+    setD(value);
+  };
+
   return (
     <div 
       style={{ 
@@ -211,11 +227,10 @@ function App() {
         b={b}
         c={c}
         d={d}
-        onAChange={setA}
-        onBChange={setB}
-        onCChange={setC}
-        onDChange={setD}
-        onSolve={handleSolve}
+        onAChange={handleAChange}
+        onBChange={handleBChange}
+        onCChange={handleCChange}
+        onDChange={handleDChange}
       />
 
       {/* Equation display */}

@@ -4,10 +4,9 @@ interface CubicInputProps {
   onBChange: (value: number) => void;
   onCChange: (value: number) => void;
   onDChange: (value: number) => void;
-  onSolve: () => void;
 }
 
-function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, onSolve }: CubicInputProps) {
+function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange }: CubicInputProps) {
   return (
     <div 
       style={{ 
@@ -97,29 +96,6 @@ function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, on
           }}
         />
       </div>
-
-      <button
-        onClick={onSolve}
-        style={{
-          backgroundColor: '#bfcc94',
-          color: '#0d1821',
-          fontFamily: 'inherit',
-          fontWeight: 700,
-          lineHeight: 1.3,
-          margin: '3px',
-          height: '40px',
-          marginTop: '40px',
-          alignSelf: 'flex-start',
-          padding: '12px',
-          border: 'none',
-          borderRadius: '20px',
-          cursor: 'pointer'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e6aace'}
-        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#bfcc94'}
-      >
-        Solve Cubic
-      </button>
     </div>
   );
 }
