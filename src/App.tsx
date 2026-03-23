@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CubicInput from './CubicInput';
-import CubicEquation from './CubicEquation';
+import CubicTable from './CubicTable';
+import CubicGraph from './CubicGraph';
 
 const formatSign = (value: number, variable: string) => {
   if (value === 0) return "";
@@ -58,105 +59,24 @@ function App() {
   const [pValue, setPValue] = useState('');
   const [qValue, setQValue] = useState('');
   const [discValue, setDiscValue] = useState('');
-  const [root1Value, setRoot1Value] = useState('');
-  const [root2Value, setRoot2Value] = useState('');
-  const [root3Value, setRoot3Value] = useState('');
-  
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const drawGrid = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
-    ctx.clearRect(0, 0, 600, 400);
-
-    ctx.beginPath();
-    ctx.strokeStyle = "#cccccc";
-    ctx.lineWidth = 0.5;
-
-    for (let x = -15; x <= 15; x++) {
-      const canvasX = 300 + x * 20;
-      ctx.moveTo(canvasX, 0);
-      ctx.lineTo(canvasX, 400);
-    }
-
-    for (let y = -10; y <= 10; y++) {
-      const canvasY = 200 - y * 20;
-      ctx.moveTo(0, canvasY);
-      ctx.lineTo(600, canvasY);
-    }
-    
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.strokeStyle = "#333";
-    ctx.lineWidth = 2;
-    ctx.moveTo(0, 200);
-    ctx.lineTo(600, 200);
-    ctx.moveTo(300, 0);
-    ctx.lineTo(300, 400);
-    ctx.stroke();
-  };
-
-  const drawFunction = (a: number, b: number, c: number, d: number, roots: (number | string)[]) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
-    drawGrid();
-
-    ctx.beginPath();
-    ctx.strokeStyle = "#e6aace";
-    ctx.lineWidth = 3;
-    let first = true;
-
-    for (let x = -15; x <= 15; x += 0.1) {
-      const y = a * Math.pow(x, 3) + b * Math.pow(x, 2) + c * x + d;
-      const canvasX = 300 + x * 20;
-      const canvasY = 200 - y * 20;
-
-      if (first) {
-        ctx.moveTo(canvasX, canvasY);
-        first = false;
-      } else {
-        ctx.lineTo(canvasX, canvasY);
-      }
-    }
-    ctx.stroke();
-
-    roots.forEach((root) => {
-      if (typeof root === "number") {
-        ctx.beginPath();
-        const canvasX = 300 + root * 20;
-        const canvasY = 200;
-        ctx.arc(canvasX, canvasY, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = "#0d1821";
-        ctx.fill();
-      }
-    });
-  };
+  const [roots, setRoots] = useState<(number | string)[]>([0, 0, 0]);
 
   const updateResults = () => {
     if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
       setEquationText('no blanks in input');
-      drawGrid();
       setPValue('');
       setQValue('');
       setDiscValue('');
-      setRoot1Value('');
-      setRoot2Value('');
-      setRoot3Value('');
+      setRoots([0, 0, 0]);
       return;
     }
     
     if (a === 0) {
       setEquationText('give a cubic equation');
-      drawGrid();
       setPValue('');
       setQValue('');
       setDiscValue('');
-      setRoot1Value('');
-      setRoot2Value('');
-      setRoot3Value('');
+      setRoots([0, 0, 0]);
       return;
     }
 
@@ -173,33 +93,14 @@ function App() {
     setQValue(q.toFixed(4));
     setDiscValue(discriminant.toFixed(4));
 
-    const roots = getRoots(discriminant, p, q, translation);
-    setRoot1Value(formatRoot(roots[0]));
-    setRoot2Value(formatRoot(roots[1]));
-    setRoot3Value(formatRoot(roots[2]));
-
-    drawFunction(a, b, c, d, roots);
+    const calculatedRoots = getRoots(discriminant, p, q, translation);
+    const formattedRoots = calculatedRoots.map(root => formatRoot(root));
+    setRoots(formattedRoots);
   };
 
   useEffect(() => {
     updateResults();
   }, [a, b, c, d]);
-
-  const handleAChange = (value: number) => {
-    setA(value);
-  };
-
-  const handleBChange = (value: number) => {
-    setB(value);
-  };
-
-  const handleCChange = (value: number) => {
-    setC(value);
-  };
-
-  const handleDChange = (value: number) => {
-    setD(value);
-  };
 
   return (
     <div 
@@ -227,10 +128,10 @@ function App() {
         b={b}
         c={c}
         d={d}
-        onAChange={handleAChange}
-        onBChange={handleBChange}
-        onCChange={handleCChange}
-        onDChange={handleDChange}
+        onAChange={setA}
+        onBChange={setB}
+        onCChange={setC}
+        onDChange={setD}
       />
 
       {/* Equation display */}
@@ -267,27 +168,16 @@ function App() {
           padding: '20px'
         }}
       >
-        <CubicEquation
+        <CubicTable
           pValue={pValue}
           qValue={qValue}
           discValue={discValue}
-          root1Value={root1Value}
-          root2Value={root2Value}
-          root3Value={root3Value}
+          root1Value={roots[0]}
+          root2Value={roots[1]}
+          root3Value={roots[2]}
         />
         
-        <canvas
-          ref={canvasRef}
-          id="graph"
-          width="600"
-          height="400"
-          style={{
-            display: 'block',
-            background: '#f9f9f9',
-            border: '3px solid #15293a',
-            borderRadius: '10px'
-          }}
-        ></canvas>
+        <CubicGraph a={a} b={b} c={c} d={d} roots={roots} />
       </div>
     </div>
   );

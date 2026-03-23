@@ -1,5 +1,8 @@
 interface CubicInputProps {
-  a: number; b: number; c: number; d: number;
+  a: number; 
+  b: number; 
+  c: number; 
+  d: number;
   onAChange: (value: number) => void;
   onBChange: (value: number) => void;
   onCChange: (value: number) => void;
