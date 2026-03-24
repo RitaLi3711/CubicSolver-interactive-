@@ -103,23 +103,8 @@ function App() {
   }, [a, b, c, d]);
 
   return (
-    <div 
-      style={{ 
-        fontFamily: "'Trebuchet MS', 'Lucida Sans Unicode', sans-serif",
-        backgroundColor: '#f0f4ef',
-        textAlign: 'center',
-        padding: '20px'
-      }}
-    >
-      <h1 
-        style={{ 
-          color: '#e6aace',
-          textShadow: '2px 2px #0d1821',
-          fontSize: '2rem',
-          margin: 0,
-          lineHeight: 1.3
-        }}
-      >
+    <div className="font-['Trebuchet_MS','Lucida_Sans_Unicode',sans-serif] bg-[#f0f4ef] text-center p-5">
+      <h1 className="text-[#e6aace] text-4xl m-0 leading-[1.3]" style={{ textShadow: '2px 2px #0d1821' }}>
         Cubic Solver
       </h1>
 
@@ -135,39 +120,14 @@ function App() {
       />
 
       {/* Equation display */}
-      <div 
-        style={{ 
-          margin: '20px auto',
-          padding: '12px 20px',
-          background: 'white',
-          border: '3px solid #bfcc94',
-          borderRadius: '12px',
-          width: 'fit-content'
-        }}
-      >
-        <h2 
-          style={{ 
-            margin: 0,
-            color: '#344966',
-            fontWeight: 600
-          }}
-        >
+      <div className="my-5 mx-auto py-3 px-5 bg-white border-3 border-[#bfcc94] rounded-xl w-fit">
+        <h2 className="m-0 text-[#344966] font-semibold">
           {equationText}
         </h2>
       </div>
 
       {/* Table and Graph side by side */}
-      <div 
-        style={{ 
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          gap: '30px',
-          margin: '30px auto',
-          maxWidth: '1200px',
-          padding: '20px'
-        }}
-      >
+      <div className="flex justify-center items-start gap-[30px] my-[30px] mx-auto max-w-[1200px] p-5">
         <CubicTable
           pValue={pValue}
           qValue={qValue}

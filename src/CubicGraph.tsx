@@ -89,16 +89,10 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
   return (
     <canvas
       ref={canvasRef}
-      id="graph"
       width="600"
       height="400"
-      style={{
-        display: 'block',
-        background: '#f9f9f9',
-        border: '3px solid #15293a',
-        borderRadius: '10px'
-      }}
-    ></canvas>
+      className="block bg-[#f9f9f9] border-3 border-[#15293a] rounded-[10px]"
+    />
   );
 }
 
