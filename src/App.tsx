@@ -59,7 +59,7 @@ function App() {
   const [pValue, setPValue] = useState('');
   const [qValue, setQValue] = useState('');
   const [discValue, setDiscValue] = useState('');
-  const [roots, setRoots] = useState<(number | string)[]>([0, 0, 0]);
+  const [roots, setRoots] = useState<(number|string)[]>([0, 0, 0]);
 
   const updateResults = () => {
     if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {

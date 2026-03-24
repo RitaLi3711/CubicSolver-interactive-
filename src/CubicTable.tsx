@@ -2,9 +2,9 @@ interface CubicTableProps {
   pValue: string;
   qValue: string;
   discValue: string;
-  root1Value: string;
-  root2Value: string;
-  root3Value: string;
+  root1Value: number | string;
+  root2Value: number | string;
+  root3Value: number | string;
 }
 
 function CubicTable({ 
