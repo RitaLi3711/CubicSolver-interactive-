@@ -2,9 +2,9 @@ interface CubicTableProps {
   pValue: string;
   qValue: string;
   discValue: string;
-  root1Value: number | string;
-  root2Value: number | string;
-  root3Value: number | string;
+  root1Value: string;
+  root2Value: string;
+  root3Value: string;
 }
 
 function CubicTable({ 
@@ -16,40 +16,44 @@ function CubicTable({
   root3Value 
 }: CubicTableProps) {
   return (
-    <table className="w-[340px] bg-white border-[3px] border-[#e6aace] rounded-[10px] font-inherit text-[#0d1822] border-separate overflow-hidden">
-      <tbody>
-        <tr className="grid grid-cols-[100px_1fr] p-3 border-b border-[#eee]">
-          <th className="font-bold text-left m-0">p</th>
-          <td className="text-right pr-[35px] tracking-[55px] m-0">{pValue} </td>
-        </tr>
-        <tr className="grid grid-cols-[100px_1fr] p-3 border-b border-[#eee]">
-          <th className="font-bold text-left m-0">q</th>
-          <td className="text-right pr-[35px] tracking-[55px] m-0">{qValue} </td>
-        </tr>
-        <tr className="grid grid-cols-[100px_1fr] p-3 border-b border-[#eee]">
-          <th className="font-bold text-left m-0">Discriminant</th>
-          <td className="text-right pr-[35px] tracking-[55px] m-0">{discValue} </td>
-        </tr>
-        <tr className="grid grid-cols-[100px_1fr] p-3 bg-[#e6aace]">
-          <th className="font-bold text-left m-0">Values</th>
-          <td className="text-right pr-[35px] tracking-[80px] m-0">
-            <span>x</span> <span>y</span>
-          </td>
-        </tr>
-        <tr className="grid grid-cols-[100px_1fr] p-3 border-b border-[#eee]">
-          <th className="font-bold text-left m-0">Root 1</th>
-          <td className="text-right pr-[35px] tracking-[55px] m-0">{root1Value} </td>
-        </tr>
-        <tr className="grid grid-cols-[100px_1fr] p-3 border-b border-[#eee]">
-          <th className="font-bold text-left m-0">Root 2</th>
-          <td className="text-right pr-[35px] tracking-[55px] m-0">{root2Value} </td>
-        </tr>
-        <tr className="grid grid-cols-[100px_1fr] p-3 border-b border-[#eee]">
-          <th className="font-bold text-left m-0">Root 3</th>
-          <td className="text-right pr-[35px] tracking-[55px] m-0">{root3Value} </td>
-        </tr>
-      </tbody>
-    </table>
+    <div className="w-[340px] bg-white border-[3px] border-[#e6aace] rounded-[10px] overflow-hidden">
+      <div className="grid grid-cols-[100px_1fr] px-4 py-3 border-b border-[#eee]">
+        <div className="font-bold">p</div>
+        <div className="text-right pr-[35px]">{pValue}</div>
+      </div>
+      <div className="grid grid-cols-[100px_1fr] px-4 py-3 border-b border-[#eee]">
+        <div className="font-bold">q</div>
+        <div className="text-right pr-[35px]">{qValue}</div>
+      </div>
+      <div className="grid grid-cols-[100px_1fr] px-4 py-3 border-b border-[#eee]">
+        <div className="font-bold">Discriminant</div>
+        <div className="text-right pr-[35px]">{discValue}</div>
+      </div>
+      <div className="grid grid-cols-[100px_1fr] px-4 py-3 bg-[#e6aace]">
+        <div className="font-bold">Values</div>
+        <div className="text-right pr-[35px] [word-spacing:80px]">
+          <span>x</span> <span>y</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-[100px_1fr] px-4 py-3 border-b border-[#eee]">
+        <div className="font-bold">Root 1</div>
+        <div className="text-right pr-[35px] [word-spacing:55px]">
+          <span>{root1Value}</span> <span>0</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-[100px_1fr] px-4 py-3 border-b border-[#eee]">
+        <div className="font-bold">Root 2</div>
+        <div className="text-right pr-[35px] [word-spacing:55px]">
+          <span>{root2Value}</span> <span>0</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-[100px_1fr] px-4 py-3 border-b border-[#eee]">
+        <div className="font-bold">Root 3</div>
+        <div className="text-right pr-[35px] [word-spacing:55px]">
+          <span>{root3Value}</span> <span>0</span>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -46,8 +46,8 @@ const getRoots = (discriminant: number, p: number, q: number, translation: numbe
 };
 
 const formatRoot = (r: number | string) => {
-  if (typeof r === 'number') return `${r.toFixed(4)} 0`;
-  return 'complex 0';
+  if (typeof r === 'number') return `${r.toFixed(4)}`;
+  return 'complex';
 };
 
 function App() {
@@ -59,7 +59,7 @@ function App() {
   const [pValue, setPValue] = useState('');
   const [qValue, setQValue] = useState('');
   const [discValue, setDiscValue] = useState('');
-  const [roots, setRoots] = useState<(number|string)[]>([0, 0, 0]);
+const [roots, setRoots] = useState<string[]>(["0", "0", "0"]); 
 
   const updateResults = () => {
     if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
@@ -67,7 +67,7 @@ function App() {
       setPValue('');
       setQValue('');
       setDiscValue('');
-      setRoots([0, 0, 0]);
+ setRoots(["", "", ""]);
       return;
     }
     
@@ -76,7 +76,7 @@ function App() {
       setPValue('');
       setQValue('');
       setDiscValue('');
-      setRoots([0, 0, 0]);
+ setRoots(["", "", ""]);
       return;
     }
 
@@ -95,6 +95,7 @@ function App() {
 
     const calculatedRoots = getRoots(discriminant, p, q, translation);
     const formattedRoots = calculatedRoots.map(root => formatRoot(root));
+    console.log('Formatted roots:', formattedRoots);
     setRoots(formattedRoots);
   };
 
