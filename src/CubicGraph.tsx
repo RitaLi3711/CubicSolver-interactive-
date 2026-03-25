@@ -5,7 +5,7 @@ interface CubicGraphProps {
   b: number;
   c: number;
   d: number;
-  roots: (number | string)[];
+  roots: string[]; // Changed to string[]
 }
 
 function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
@@ -49,44 +49,42 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
-
-    // Always draw grid first
     drawGrid();
 
-    // Only draw the cubic function if a is not 0 and not NaN
-    if (a === 0 || isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
-      // Just draw grid, no function
-      return;
-    }
+    // Only draw function if a is not 0
+    if (a !== 0) {
+      ctx.beginPath();
+      ctx.strokeStyle = "#e6aace";
+      ctx.lineWidth = 3;
+      let first = true;
 
-    ctx.beginPath();
-    ctx.strokeStyle = "#e6aace";
-    ctx.lineWidth = 3;
-    let first = true;
+      for (let x = -15; x <= 15; x += 0.1) {
+        const y = a * Math.pow(x, 3) + b * Math.pow(x, 2) + c * x + d;
+        const canvasX = 300 + x * 20;
+        const canvasY = 200 - y * 20;
 
-    for (let x = -15; x <= 15; x += 0.1) {
-      const y = a * Math.pow(x, 3) + b * Math.pow(x, 2) + c * x + d;
-      const canvasX = 300 + x * 20;
-      const canvasY = 200 - y * 20;
-
-      if (first) {
-        ctx.moveTo(canvasX, canvasY);
-        first = false;
-      } else {
-        ctx.lineTo(canvasX, canvasY);
+        if (first) {
+          ctx.moveTo(canvasX, canvasY);
+          first = false;
+        } else {
+          ctx.lineTo(canvasX, canvasY);
+        }
       }
+      ctx.stroke();
     }
-    ctx.stroke();
 
-    // Only draw roots if they are valid numbers
+    // Draw roots - parse strings to numbers
     roots.forEach((root) => {
-      if (typeof root === "number" && !isNaN(root)) {
-        ctx.beginPath();
-        const canvasX = 300 + root * 20;
-        const canvasY = 200;
-        ctx.arc(canvasX, canvasY, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = "#0d1821";
-        ctx.fill();
+      if (root !== "complex" && root !== "") {
+        const numericRoot = parseFloat(root);
+        if (!isNaN(numericRoot)) {
+          ctx.beginPath();
+          const canvasX = 300 + numericRoot * 20;
+          const canvasY = 200;
+          ctx.arc(canvasX, canvasY, 4, 0, 2 * Math.PI);
+          ctx.fillStyle = "#0d1821";
+          ctx.fill();
+        }
       }
     });
   };
