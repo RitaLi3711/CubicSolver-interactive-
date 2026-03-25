@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import CubicInput from './CubicInput';
-import CubicTable from './CubicTable';
-import CubicGraph from './CubicGraph';
+import { useState, useEffect } from "react";
+import CubicInput from "./CubicInput";
+import CubicTable from "./CubicTable";
+import CubicGraph from "./CubicGraph";
 
 const formatSign = (value: number, variable: string) => {
   if (value === 0) return "";
@@ -11,11 +11,7 @@ const formatSign = (value: number, variable: string) => {
 const trigMethod = (p: number, q: number, translation: number) => {
   const k = 2 * Math.sqrt(-p / 3);
   const theta = Math.acos(-q / (2 * Math.sqrt(Math.pow(-p / 3, 3)))) / 3;
-  return [
-    k * Math.cos(theta) + translation,
-    k * Math.cos(theta + (2 * Math.PI) / 3) + translation,
-    k * Math.cos(theta + (4 * Math.PI) / 3) + translation,
-  ];
+  return [k * Math.cos(theta) + translation, k * Math.cos(theta + (2 * Math.PI) / 3) + translation, k * Math.cos(theta + (4 * Math.PI) / 3) + translation];
 };
 
 const cardanoMethod = (p: number, q: number, translation: number) => {
@@ -27,12 +23,12 @@ const cardanoMethod = (p: number, q: number, translation: number) => {
 
 const getRoots = (discriminant: number, p: number, q: number, translation: number) => {
   if (Math.abs(discriminant) < 1e-12) discriminant = 0;
-  
+
   if (discriminant < 0) {
     return trigMethod(p, q, translation);
   } else if (discriminant > 0) {
     const realRoot = cardanoMethod(p, q, translation);
-    return [realRoot, 'complex', 'complex'];
+    return [realRoot, "complex", "complex"];
   } else {
     if (p === 0 && q === 0) {
       const realRoot = cardanoMethod(p, q, translation);
@@ -46,8 +42,8 @@ const getRoots = (discriminant: number, p: number, q: number, translation: numbe
 };
 
 const formatRoot = (r: number | string) => {
-  if (typeof r === 'number') return `${r.toFixed(4)}`;
-  return 'complex';
+  if (typeof r === "number") return `${r.toFixed(4)}`;
+  return "complex";
 };
 
 function App() {
@@ -55,28 +51,19 @@ function App() {
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
   const [d, setD] = useState(0);
-  const [equationText, setEquationText] = useState('1x³ + 0x² + 0x + 0 = 0');
-  const [pValue, setPValue] = useState('');
-  const [qValue, setQValue] = useState('');
-  const [discValue, setDiscValue] = useState('');
-const [roots, setRoots] = useState<string[]>(["0", "0", "0"]); 
+  const [equationText, setEquationText] = useState("1x³ + 0x² + 0x + 0 = 0");
+  const [pValue, setPValue] = useState("");
+  const [qValue, setQValue] = useState("");
+  const [discValue, setDiscValue] = useState("");
+  const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
 
   const updateResults = () => {
-    if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
-      setEquationText('no blanks in input');
-      setPValue('');
-      setQValue('');
-      setDiscValue('');
- setRoots(["", "", ""]);
-      return;
-    }
-    
     if (a === 0) {
-      setEquationText('give a cubic equation');
-      setPValue('');
-      setQValue('');
-      setDiscValue('');
- setRoots(["", "", ""]);
+      setEquationText("give a cubic equation");
+      setPValue("");
+      setQValue("");
+      setDiscValue("");
+      setRoots(["", "", ""]);
       return;
     }
 
@@ -94,8 +81,8 @@ const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
     setDiscValue(discriminant.toFixed(4));
 
     const calculatedRoots = getRoots(discriminant, p, q, translation);
-    const formattedRoots = calculatedRoots.map(root => formatRoot(root));
-    console.log('Formatted roots:', formattedRoots);
+    const formattedRoots = calculatedRoots.map((root) => formatRoot(root));
+    console.log("Formatted roots:", formattedRoots);
     setRoots(formattedRoots);
   };
 
@@ -105,39 +92,21 @@ const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
 
   return (
     <div className="font-['Trebuchet_MS','Lucida_Sans_Unicode',sans-serif] bg-[#f0f4ef] text-center p-5">
-      <h1 className="text-[#e6aace] text-4xl m-0 leading-[1.3]" style={{ textShadow: '2px 2px #0d1821' }}>
+      <h1 className="text-[#e6aace] text-4xl m-0 leading-[1.3]" style={{ textShadow: "2px 2px #0d1821" }}>
         Cubic Solver
       </h1>
 
-      <CubicInput
-        a={a}
-        b={b}
-        c={c}
-        d={d}
-        onAChange={setA}
-        onBChange={setB}
-        onCChange={setC}
-        onDChange={setD}
-      />
+      <CubicInput a={a} b={b} c={c} d={d} onAChange={setA} onBChange={setB} onCChange={setC} onDChange={setD} />
 
       {/* Equation display */}
       <div className="my-5 mx-auto py-3 px-5 bg-white border-3 border-[#bfcc94] rounded-xl w-fit">
-        <h2 className="m-0 text-[#344966] font-semibold">
-          {equationText}
-        </h2>
+        <h2 className="m-0 text-[#344966] font-semibold">{equationText}</h2>
       </div>
 
       {/* Table and Graph side by side */}
       <div className="flex justify-center items-start gap-[30px] my-[30px] mx-auto max-w-[1200px] p-5">
-        <CubicTable
-          pValue={pValue}
-          qValue={qValue}
-          discValue={discValue}
-          root1Value={roots[0]}
-          root2Value={roots[1]}
-          root3Value={roots[2]}
-        />
-        
+        <CubicTable pValue={pValue} qValue={qValue} discValue={discValue} root1Value={roots[0]} root2Value={roots[1]} root3Value={roots[2]} />
+
         <CubicGraph a={a} b={b} c={c} d={d} roots={roots} />
       </div>
     </div>

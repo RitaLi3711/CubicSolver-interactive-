@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
 interface CubicGraphProps {
   a: number;
@@ -14,7 +14,7 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
   const drawGrid = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext("2d")!;
     ctx.clearRect(0, 0, 600, 400);
 
     ctx.beginPath();
@@ -32,7 +32,7 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
       ctx.moveTo(0, canvasY);
       ctx.lineTo(600, canvasY);
     }
-    
+
     ctx.stroke();
 
     ctx.beginPath();
@@ -48,8 +48,16 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
   const drawFunction = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext("2d")!;
+
+    // Always draw grid first
     drawGrid();
+
+    // Only draw the cubic function if a is not 0 and not NaN
+    if (a === 0 || isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
+      // Just draw grid, no function
+      return;
+    }
 
     ctx.beginPath();
     ctx.strokeStyle = "#e6aace";
@@ -70,8 +78,9 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
     }
     ctx.stroke();
 
+    // Only draw roots if they are valid numbers
     roots.forEach((root) => {
-      if (typeof root === "number") {
+      if (typeof root === "number" && !isNaN(root)) {
         ctx.beginPath();
         const canvasX = 300 + root * 20;
         const canvasY = 200;
@@ -86,14 +95,7 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
     drawFunction();
   }, [a, b, c, d, roots]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      width="600"
-      height="400"
-      className="block bg-[#f9f9f9] border-3 border-[#15293a] rounded-[10px]"
-    />
-  );
+  return <canvas ref={canvasRef} width="600" height="400" className="block bg-[#f9f9f9] border-3 border-[#15293a] rounded-[10px]" />;
 }
 
 export default CubicGraph;

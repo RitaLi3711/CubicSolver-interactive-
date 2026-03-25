@@ -7,14 +7,7 @@ interface CubicEquationProps {
   root3Value: string;
 }
 
-function CubicEquation({ 
-  pValue, 
-  qValue, 
-  discValue, 
-  root1Value, 
-  root2Value, 
-  root3Value 
-}: CubicEquationProps) {
+function CubicEquation({ pValue, qValue, discValue, root1Value, root2Value, root3Value }: CubicEquationProps) {
   return (
     <table className="w-[340px] bg-white border-[3px] border-[#e6aace] rounded-[10px] font-[inherit] text-[#0d1822] border-separate overflow-hidden">
       <tbody>

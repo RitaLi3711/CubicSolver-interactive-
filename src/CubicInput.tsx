@@ -1,7 +1,7 @@
 interface CubicInputProps {
-  a: number; 
-  b: number; 
-  c: number; 
+  a: number;
+  b: number;
+  c: number;
   d: number;
   onAChange: (value: number) => void;
   onBChange: (value: number) => void;
@@ -17,9 +17,10 @@ function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange }: 
         <input
           type="number"
           step="any"
-          value={a}
-          onChange={(e) => onAChange(parseFloat(e.target.value) || 0)}
+          value={a === 0 ? "" : a}
+          onChange={(e) => onAChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
+          placeholder="0"
         />
       </div>
 
@@ -28,9 +29,10 @@ function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange }: 
         <input
           type="number"
           step="any"
-          value={b}
-          onChange={(e) => onBChange(parseFloat(e.target.value) || 0)}
+          value={b === 0 ? "" : b}
+          onChange={(e) => onBChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
+          placeholder="0"
         />
       </div>
 
@@ -39,9 +41,10 @@ function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange }: 
         <input
           type="number"
           step="any"
-          value={c}
-          onChange={(e) => onCChange(parseFloat(e.target.value) || 0)}
+          value={c === 0 ? "" : c}
+          onChange={(e) => onCChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
+          placeholder="0"
         />
       </div>
 
@@ -50,9 +53,10 @@ function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange }: 
         <input
           type="number"
           step="any"
-          value={d}
-          onChange={(e) => onDChange(parseFloat(e.target.value) || 0)}
+          value={d === 0 ? "" : d}
+          onChange={(e) => onDChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
+          placeholder="0"
         />
       </div>
     </div>
