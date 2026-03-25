@@ -59,6 +59,10 @@ function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange }: 
           placeholder="0"
         />
       </div>
+
+      <button className=" bg-#bfcc94 outline-#0d1821 font-inherit font-medium leading-[1.3] mx-3 h-40 mt-40 self-start p-12 border-[#e6aace] rounded-[20px]">
+        Save
+      </button>
     </div>
   );
 }

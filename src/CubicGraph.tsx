@@ -5,7 +5,7 @@ interface CubicGraphProps {
   b: number;
   c: number;
   d: number;
-  roots: string[]; // Changed to string[]
+  roots: string[];
 }
 
 function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
@@ -51,7 +51,6 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
     const ctx = canvas.getContext("2d")!;
     drawGrid();
 
-    // Only draw function if a is not 0
     if (a !== 0) {
       ctx.beginPath();
       ctx.strokeStyle = "#e6aace";
@@ -73,7 +72,6 @@ function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
       ctx.stroke();
     }
 
-    // Draw roots - parse strings to numbers
     roots.forEach((root) => {
       if (root !== "complex" && root !== "") {
         const numericRoot = parseFloat(root);

@@ -98,12 +98,10 @@ function App() {
 
       <CubicInput a={a} b={b} c={c} d={d} onAChange={setA} onBChange={setB} onCChange={setC} onDChange={setD} />
 
-      {/* Equation display */}
       <div className="my-5 mx-auto py-3 px-5 bg-white border-3 border-[#bfcc94] rounded-xl w-fit">
         <h2 className="m-0 text-[#344966] font-semibold">{equationText}</h2>
       </div>
 
-      {/* Table and Graph side by side */}
       <div className="flex justify-center items-start gap-[30px] my-[30px] mx-auto max-w-[1200px] p-5">
         <CubicTable pValue={pValue} qValue={qValue} discValue={discValue} root1Value={roots[0]} root2Value={roots[1]} root3Value={roots[2]} />
 
