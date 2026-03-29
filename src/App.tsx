@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CubicInput from "./CubicInput";
 import CubicTable from "./CubicTable";
 import CubicGraph from "./CubicGraph";
+import CubicHistory from "./CubicHistory";
 
 const formatSign = (value: number, variable: string) => {
   if (value === 0) return "";
@@ -56,6 +57,14 @@ function App() {
   const [qValue, setQValue] = useState("");
   const [discValue, setDiscValue] = useState("");
   const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
+  
+  const [savedValues, setSavedValues] = useState<Array<{id: number; a: number; b: number; c: number; d: number}>>([]);
+  const handleLoad = (loadedA: number, loadedB: number, loadedC: number, loadedD: number) => {
+  setA(loadedA);
+  setB(loadedB);
+  setC(loadedC);
+  setD(loadedD);
+};
 
   const updateResults = () => {
     if (a === 0) {
@@ -90,13 +99,26 @@ function App() {
     updateResults();
   }, [a, b, c, d]);
 
+  const handleSave = () => {
+  console.log("Save button clicked!", { a, b, c, d });
+    const newEntry = {
+      id: Date.now(),
+      a, b, c, d,
+    };
+    setSavedValues([...savedValues, newEntry]);
+  };
+
   return (
     <div className="font-['Trebuchet_MS','Lucida_Sans_Unicode',sans-serif] bg-[#f0f4ef] text-center p-5">
       <h1 className="text-[#e6aace] text-4xl m-0 leading-[1.3]" style={{ textShadow: "2px 2px #0d1821" }}>
         Cubic Solver
       </h1>
 
-      <CubicInput a={a} b={b} c={c} d={d} onAChange={setA} onBChange={setB} onCChange={setC} onDChange={setD} />
+      <CubicInput 
+        a={a} b={b} c={c} d={d} 
+        onAChange={setA} onBChange={setB} onCChange={setC} onDChange={setD}
+        onSave={handleSave}
+      />
 
       <div className="my-5 mx-auto py-3 px-5 bg-white border-3 border-[#bfcc94] rounded-xl w-fit">
         <h2 className="m-0 text-[#344966] font-semibold">{equationText}</h2>
@@ -104,9 +126,10 @@ function App() {
 
       <div className="flex justify-center items-start gap-[30px] my-[30px] mx-auto max-w-[1200px] p-5">
         <CubicTable pValue={pValue} qValue={qValue} discValue={discValue} root1Value={roots[0]} root2Value={roots[1]} root3Value={roots[2]} />
-
         <CubicGraph a={a} b={b} c={c} d={d} roots={roots} />
       </div>
+      
+<CubicHistory savedValues={savedValues} onLoad={handleLoad} />
     </div>
   );
 }
