@@ -27,7 +27,7 @@ function CubicHistory({ savedValues, onLoad }: CubicHistoryProps) {
         <tbody>
           {savedValues.length === 0 ? (
             <tr>
-              <td colSpan={4} className="p-4 text-center text-[#e6aace]">
+              <td colSpan={4} className="p-4 text-center text-[#344966]">
                 No saved equations yet. Click Save to add one!
               </td>
             </tr>
