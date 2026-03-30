@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import CubicInput from "./CubicInput";
-import CubicTable from "./CubicTable";
-import CubicGraph from "./CubicGraph";
-import CubicHistory from "./CubicHistory";
+import CubicTable from "./components/CubicTable";
+import CubicInput from "./components/CubicInput";
+import CubicHistory from "./components/CubicHistory";
+import CubicGraph from "./components/CubicGraph";
+import CubicEquation from "./components/CubicEquation"; // Now we're using it!
 
 const formatSign = (value: number, variable: string) => {
   if (value === 0) return "";
@@ -52,33 +53,28 @@ function App() {
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
   const [d, setD] = useState(0);
-  const [equationText, setEquationText] = useState("1x³ + 0x² + 0x + 0 = 0");
   const [pValue, setPValue] = useState("");
   const [qValue, setQValue] = useState("");
   const [discValue, setDiscValue] = useState("");
   const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
   
   const [savedValues, setSavedValues] = useState<Array<{id: number; a: number; b: number; c: number; d: number}>>([]);
+  
   const handleLoad = (loadedA: number, loadedB: number, loadedC: number, loadedD: number) => {
-  setA(loadedA);
-  setB(loadedB);
-  setC(loadedC);
-  setD(loadedD);
-};
+    setA(loadedA);
+    setB(loadedB);
+    setC(loadedC);
+    setD(loadedD);
+  };
 
   const updateResults = () => {
     if (a === 0) {
-      setEquationText("give a cubic equation");
       setPValue("");
       setQValue("");
       setDiscValue("");
       setRoots(["", "", ""]);
       return;
     }
-
-    let eq = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
-    eq = eq.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");
-    setEquationText(eq);
 
     const p = (3 * a * c - b * b) / (3 * a * a);
     const q = (2 * b * b * b - 9 * a * b * c + 27 * a * a * d) / (27 * a * a * a);
@@ -91,7 +87,6 @@ function App() {
 
     const calculatedRoots = getRoots(discriminant, p, q, translation);
     const formattedRoots = calculatedRoots.map((root) => formatRoot(root));
-    console.log("Formatted roots:", formattedRoots);
     setRoots(formattedRoots);
   };
 
@@ -100,12 +95,19 @@ function App() {
   }, [a, b, c, d]);
 
   const handleSave = () => {
-  console.log("Save button clicked!", { a, b, c, d });
     const newEntry = {
       id: Date.now(),
       a, b, c, d,
     };
     setSavedValues([...savedValues, newEntry]);
+  };
+
+  // Generate equation string to pass to CubicEquation component
+  const getEquationString = () => {
+    if (a === 0) return "give a cubic equation ";
+    let eq = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
+    eq = eq.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");
+    return eq;
   };
 
   return (
@@ -120,16 +122,22 @@ function App() {
         onSave={handleSave}
       />
 
-      <div className="my-5 mx-auto py-3 px-5 bg-white border-3 border-[#bfcc94] rounded-xl w-fit">
-        <h2 className="m-0 text-[#344966] font-semibold">{equationText}</h2>
-      </div>
+      {/* Using the CubicEquation component here instead of rendering directly */}
+      <CubicEquation equation={getEquationString()} />
 
       <div className="flex justify-center items-start gap-[30px] my-[30px] mx-auto max-w-[1200px] p-5">
-        <CubicTable pValue={pValue} qValue={qValue} discValue={discValue} root1Value={roots[0]} root2Value={roots[1]} root3Value={roots[2]} />
+        <CubicTable 
+          pValue={pValue} 
+          qValue={qValue} 
+          discValue={discValue} 
+          root1Value={roots[0]} 
+          root2Value={roots[1]} 
+          root3Value={roots[2]} 
+        />
         <CubicGraph a={a} b={b} c={c} d={d} roots={roots} />
       </div>
       
-<CubicHistory savedValues={savedValues} onLoad={handleLoad} />
+      <CubicHistory savedValues={savedValues} onLoad={handleLoad} />
     </div>
   );
 }
