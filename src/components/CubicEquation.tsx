@@ -1,15 +1,28 @@
-import React from 'react';
-
 interface CubicEquationProps {
-  equation: string;
+  a: number;
+  b: number;
+  c: number;
+  d: number;
 }
 
-const CubicEquation: React.FC<CubicEquationProps> = ({ equation }) => {
+const formatSign = (value: number, variable: string) => {
+  if (value === 0) return "";
+  return value > 0 ? ` + ${value}${variable}` : ` - ${Math.abs(value)}${variable}`;
+};
+
+function CubicEquation({ a, b, c, d }: CubicEquationProps) {
+  const getEquationString = () => {
+    if (a === 0) return "Enter a cubic equation (a ≠ 0)";
+    let eq = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
+    eq = eq.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");
+    return eq;
+  };
+
   return (
     <div className="my-5 mx-auto py-3 px-5 bg-white border-3 border-[#bfcc94] rounded-xl w-fit">
-      <h2 className="m-0 text-[#344966] font-semibold">{equation}</h2>
+      <h2 className="m-0 text-[#344966] font-semibold">{getEquationString()}</h2>
     </div>
   );
-};
+}
 
 export default CubicEquation;

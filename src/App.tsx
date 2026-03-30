@@ -3,12 +3,7 @@ import CubicTable from "./components/CubicTable";
 import CubicInput from "./components/CubicInput";
 import CubicHistory from "./components/CubicHistory";
 import CubicGraph from "./components/CubicGraph";
-import CubicEquation from "./components/CubicEquation"; // Now we're using it!
-
-const formatSign = (value: number, variable: string) => {
-  if (value === 0) return "";
-  return value > 0 ? ` + ${value}${variable}` : ` - ${Math.abs(value)}${variable}`;
-};
+import CubicEquation from "./components/CubicEquation";
 
 const trigMethod = (p: number, q: number, translation: number) => {
   const k = 2 * Math.sqrt(-p / 3);
@@ -102,14 +97,6 @@ function App() {
     setSavedValues([...savedValues, newEntry]);
   };
 
-  // Generate equation string to pass to CubicEquation component
-  const getEquationString = () => {
-    if (a === 0) return "give a cubic equation ";
-    let eq = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
-    eq = eq.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");
-    return eq;
-  };
-
   return (
     <div className="font-['Trebuchet_MS','Lucida_Sans_Unicode',sans-serif] bg-[#f0f4ef] text-center p-5">
       <h1 className="text-[#e6aace] text-4xl m-0 leading-[1.3]" style={{ textShadow: "2px 2px #0d1821" }}>
@@ -122,8 +109,7 @@ function App() {
         onSave={handleSave}
       />
 
-      {/* Using the CubicEquation component here instead of rendering directly */}
-      <CubicEquation equation={getEquationString()} />
+      <CubicEquation a={a} b={b} c={c} d={d} />
 
       <div className="flex justify-center items-start gap-[30px] my-[30px] mx-auto max-w-[1200px] p-5">
         <CubicTable 
