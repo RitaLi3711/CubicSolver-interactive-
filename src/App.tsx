@@ -48,21 +48,22 @@ function App() {
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
   const [d, setD] = useState(0);
+  
   const [pValue, setPValue] = useState("");
   const [qValue, setQValue] = useState("");
   const [discValue, setDiscValue] = useState("");
   const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
   
-  const [savedValues, setSavedValues] = useState<Array<{id: number; a: number; b: number; c: number; d: number}>>([]);
+  const [savedEquations, setSavedEquations] = useState<Array<{a: number; b: number; c: number; d: number}>>([]);
   
-  const handleLoad = (loadedA: number, loadedB: number, loadedC: number, loadedD: number) => {
+  const loadEquation = (loadedA: number, loadedB: number, loadedC: number, loadedD: number) => {
     setA(loadedA);
     setB(loadedB);
     setC(loadedC);
     setD(loadedD);
   };
 
-  const updateResults = () => {
+  const notCubic = () => {
     if (a === 0) {
       setPValue("");
       setQValue("");
@@ -86,15 +87,12 @@ function App() {
   };
 
   useEffect(() => {
-    updateResults();
+    notCubic();
   }, [a, b, c, d]);
 
-  const handleSave = () => {
-    const newEntry = {
-      id: Date.now(),
-      a, b, c, d,
-    };
-    setSavedValues([...savedValues, newEntry]);
+  const saveEquation = () => {
+    const newEquation = { a, b, c, d };
+    setSavedEquations([...savedEquations, newEquation]);
   };
 
   return (
@@ -106,7 +104,7 @@ function App() {
       <CubicInput 
         a={a} b={b} c={c} d={d} 
         onAChange={setA} onBChange={setB} onCChange={setC} onDChange={setD}
-        onSave={handleSave}
+        onSave={saveEquation}
       />
 
       <CubicEquation a={a} b={b} c={c} d={d} />
@@ -123,7 +121,7 @@ function App() {
         <CubicGraph a={a} b={b} c={c} d={d} roots={roots} />
       </div>
       
-      <CubicHistory savedValues={savedValues} onLoad={handleLoad} />
+      <CubicHistory savedEquations={savedEquations} onLoad={loadEquation} />
     </div>
   );
 }

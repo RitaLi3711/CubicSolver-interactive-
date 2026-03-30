@@ -1,17 +1,9 @@
-interface SavedEntry {
-  id: number;
-  a: number;
-  b: number;
-  c: number;
-  d: number;
-}
-
 interface CubicHistoryProps {
-  savedValues: SavedEntry[];
+  savedEquations: Array<{a: number; b: number; c: number; d: number}>;
   onLoad: (a: number, b: number, c: number, d: number) => void;
 }
 
-function CubicHistory({ savedValues, onLoad }: CubicHistoryProps) {
+function CubicHistory({ savedEquations, onLoad }: CubicHistoryProps) {
   return (
     <div className="mt-8 mx-auto max-w-[800px]">
       <h3 className="text-[#344966] font-bold mb-3 text-lg text-center">History</h3>
@@ -22,26 +14,26 @@ function CubicHistory({ savedValues, onLoad }: CubicHistoryProps) {
             <th className="p-2">b</th>
             <th className="p-2">c</th>
             <th className="p-2">d</th>
-          </tr>
+           </tr>
         </thead>
         <tbody>
-          {savedValues.length === 0 ? (
+          {savedEquations.length === 0 ? (
             <tr>
               <td colSpan={4} className="p-4 text-center text-[#344966]">
                 No saved equations yet. Click the save button to add one! :)))
-              </td>
+               </td>
             </tr>
           ) : (
-            savedValues.map((entry) => (
+            savedEquations.map((equation, index) => (
               <tr
-                key={entry.id}
-                onClick={() => onLoad(entry.a, entry.b, entry.c, entry.d)}
+                key={index}
+                onClick={() => onLoad(equation.a, equation.b, equation.c, equation.d)}
                 className="border-b-3 border-[#e6aace] hover:bg-[#344966] cursor-pointer transition group"
               >
-                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{entry.a}</td>
-                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{entry.b}</td>
-                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{entry.c}</td>
-                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{entry.d}</td>
+                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{equation.a}</td>
+                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{equation.b}</td>
+                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{equation.c}</td>
+                <td className="p-3 text-[#344966] group-hover:text-[#e6aace] text-center font-mono">{equation.d}</td>
               </tr>
             ))
           )}
