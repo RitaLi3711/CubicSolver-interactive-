@@ -8,8 +8,8 @@ interface CubicGraphProps {
   roots: string[];
 }
 
-function CubicGraph({ a, b, c, d, roots }: CubicGraphProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+const CubicGraph = ({ a, b, c, d, roots }: CubicGraphProps) => {
+const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawGrid = () => {
     const canvas = canvasRef.current;

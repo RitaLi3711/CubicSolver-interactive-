@@ -7,14 +7,7 @@ interface CubicTableProps {
   root3Value: string;
 }
 
-function CubicTable({ 
-  pValue, 
-  qValue, 
-  discValue, 
-  root1Value, 
-  root2Value, 
-  root3Value 
-}: CubicTableProps) {
+const CubicTable = ({ pValue, qValue, discValue, root1Value, root2Value, root3Value }: CubicTableProps) => {
   return (
     <div className="w-[340px] border-[3px] border-[#e6aace] rounded-[10px] overflow-hidden">
       <table className="w-full bg-white border-collapse">

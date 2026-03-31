@@ -55,7 +55,7 @@ function App() {
   const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
   
   const [savedEquations, setSavedEquations] = useState<Array<{a: number; b: number; c: number; d: number}>>([]);
-  
+    
   const loadEquation = (loadedA: number, loadedB: number, loadedC: number, loadedD: number) => {
     setA(loadedA);
     setB(loadedB);

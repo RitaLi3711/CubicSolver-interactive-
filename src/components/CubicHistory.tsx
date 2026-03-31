@@ -3,8 +3,7 @@ interface CubicHistoryProps {
   onLoad: (a: number, b: number, c: number, d: number) => void;
 }
 
-function CubicHistory({ savedEquations, onLoad }: CubicHistoryProps) {
-  return (
+const CubicHistory = ({ savedEquations, onLoad }: CubicHistoryProps) => {  return (
     <div className="mt-8 mx-auto max-w-[800px]">
       <h3 className="text-[#344966] font-bold mb-3 text-lg text-center">History</h3>
       <table className="w-full border-4 border-[#e6aace] rounded-[10px] overflow-hidden">

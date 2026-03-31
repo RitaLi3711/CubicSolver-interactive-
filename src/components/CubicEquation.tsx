@@ -10,8 +10,7 @@ const formatSign = (value: number, variable: string) => {
   return value > 0 ? ` + ${value}${variable}` : ` - ${Math.abs(value)}${variable}`;
 };
 
-function CubicEquation({ a, b, c, d }: CubicEquationProps) {
-  const getEquationString = () => {
+const CubicEquation = ({ a, b, c, d }: CubicEquationProps) => {  const getEquationString = () => {
     if (a === 0) return "give a cubic equation ";
     let eq = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
     eq = eq.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");

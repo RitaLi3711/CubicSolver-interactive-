@@ -10,8 +10,7 @@ interface CubicInputProps {
   onSave: () => void;
 }
 
-function CubicInput({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, onSave }: CubicInputProps) {
-  return (
+const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, onSave }: CubicInputProps) => {  return (
     <div className="flex justify-center items-center gap-5 my-5">
       <div className="flex flex-col items-center">
         <h2 className="text-[#344966] text-base my-2.5 leading-[1.3]">a-value:</h2>
