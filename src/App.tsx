@@ -43,7 +43,7 @@ const formatRoot = (r: number | string) => {
   return "complex";
 };
 
-function App() {
+export const App = () => {
   const [a, setA] = useState(0);
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
@@ -124,6 +124,4 @@ function App() {
       <CubicHistory savedEquations={savedEquations} onLoad={loadEquation} />
     </div>
   );
-}
-
-export default App;
+};
