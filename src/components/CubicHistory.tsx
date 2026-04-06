@@ -1,9 +1,10 @@
-interface CubicHistoryProps {
+type CubicHistoryProps = {
   savedEquations: Array<{a: number; b: number; c: number; d: number}>;
   onLoad: (a: number, b: number, c: number, d: number) => void;
-}
+};
 
-const CubicHistory = ({ savedEquations, onLoad }: CubicHistoryProps) => {  return (
+export const CubicHistory = ({ savedEquations, onLoad }: CubicHistoryProps) => {
+  return (
     <div className="mt-8 mx-auto max-w-[800px]">
       <h3 className="text-[#344966] font-bold mb-3 text-lg text-center">History</h3>
       <table className="w-full border-4 border-[#e6aace] rounded-[10px] overflow-hidden">
@@ -13,14 +14,14 @@ const CubicHistory = ({ savedEquations, onLoad }: CubicHistoryProps) => {  retur
             <th className="p-2">b</th>
             <th className="p-2">c</th>
             <th className="p-2">d</th>
-           </tr>
+          </tr>
         </thead>
         <tbody>
           {savedEquations.length === 0 ? (
             <tr>
               <td colSpan={4} className="p-4 text-center text-[#344966]">
                 No saved equations yet. Click the save button to add one! :)))
-               </td>
+              </td>
             </tr>
           ) : (
             savedEquations.map((equation, index) => (
@@ -40,6 +41,4 @@ const CubicHistory = ({ savedEquations, onLoad }: CubicHistoryProps) => {  retur
       </table>
     </div>
   );
-}
-
-export default CubicHistory;
+};

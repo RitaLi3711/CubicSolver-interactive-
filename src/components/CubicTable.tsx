@@ -1,13 +1,13 @@
-interface CubicTableProps {
+type CubicTableProps = {
   pValue: string;
   qValue: string;
   discValue: string;
   root1Value: string;
   root2Value: string;
   root3Value: string;
-}
+};
 
-const CubicTable = ({ pValue, qValue, discValue, root1Value, root2Value, root3Value }: CubicTableProps) => {
+export const CubicTable = ({ pValue, qValue, discValue, root1Value, root2Value, root3Value }: CubicTableProps) => {
   return (
     <div className="w-[340px] border-[3px] border-[#e6aace] rounded-[10px] overflow-hidden">
       <table className="w-full bg-white border-collapse">
@@ -35,23 +35,21 @@ const CubicTable = ({ pValue, qValue, discValue, root1Value, root2Value, root3Va
             <td className="text-right pr-[35px] [word-spacing:55px]">
               <span>{root1Value}</span> <span>0</span>
             </td>
-          </tr>
+           </tr>
           <tr className="border-b border-[#eee]">
             <th className="font-bold text-left px-4 py-3 w-[100px]">Root 2</th>
             <td className="text-right pr-[35px] [word-spacing:55px]">
               <span>{root2Value}</span> <span>0</span>
             </td>
-          </tr>
+           </tr>
           <tr className="border-b border-[#eee]">
             <th className="font-bold text-left px-4 py-3 w-[100px]">Root 3</th>
             <td className="text-right pr-[35px] [word-spacing:55px]">
               <span>{root3Value}</span> <span>0</span>
             </td>
-          </tr>
+           </tr>
         </tbody>
       </table>
     </div>
   );
-}
-
-export default CubicTable;
+};

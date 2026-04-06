@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import CubicTable from "./components/CubicTable";
-import CubicInput from "./components/CubicInput";
-import CubicHistory from "./components/CubicHistory";
-import CubicGraph from "./components/CubicGraph";
-import CubicEquation from "./components/CubicEquation";
+import { CubicTable } from "./components/CubicTable";
+import { CubicInput } from "./components/CubicInput";
+import { CubicHistory } from "./components/CubicHistory";
+import { CubicGraph } from "./components/CubicGraph";
+import { CubicEquation } from "./components/CubicEquation";
 
 const trigMethod = (p: number, q: number, translation: number) => {
   const k = 2 * Math.sqrt(-p / 3);

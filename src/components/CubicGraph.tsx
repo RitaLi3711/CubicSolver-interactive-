@@ -1,15 +1,15 @@
 import { useRef, useEffect } from "react";
 
-interface CubicGraphProps {
+type CubicGraphProps = {
   a: number;
   b: number;
   c: number;
   d: number;
   roots: string[];
-}
+};
 
-const CubicGraph = ({ a, b, c, d, roots }: CubicGraphProps) => {
-const canvasRef = useRef<HTMLCanvasElement>(null);
+export const CubicGraph = ({ a, b, c, d, roots }: CubicGraphProps) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawGrid = () => {
     const canvas = canvasRef.current;
@@ -92,6 +92,4 @@ const canvasRef = useRef<HTMLCanvasElement>(null);
   }, [a, b, c, d, roots]);
 
   return <canvas ref={canvasRef} width="600" height="400" className="block bg-[#f9f9f9] border-3 border-[#15293a] rounded-[10px]" />;
-}
-
-export default CubicGraph;
+};

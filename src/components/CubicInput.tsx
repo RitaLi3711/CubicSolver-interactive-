@@ -1,4 +1,4 @@
-interface CubicInputProps {
+type CubicInputProps = {
   a: number;
   b: number;
   c: number;
@@ -8,9 +8,10 @@ interface CubicInputProps {
   onCChange: (value: number) => void;
   onDChange: (value: number) => void;
   onSave: () => void;
-}
+};
 
-const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, onSave }: CubicInputProps) => {  return (
+export const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, onSave }: CubicInputProps) => {
+  return (
     <div className="flex justify-center items-center gap-5 my-5">
       <div className="flex flex-col items-center">
         <h2 className="text-[#344966] text-base my-2.5 leading-[1.3]">a-value:</h2>
@@ -68,6 +69,4 @@ const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, on
       </button>
     </div>
   );
-}
-
-export default CubicInput;
+};

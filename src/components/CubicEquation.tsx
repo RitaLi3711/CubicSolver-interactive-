@@ -1,16 +1,17 @@
-interface CubicEquationProps {
+type CubicEquationProps = {
   a: number;
   b: number;
   c: number;
   d: number;
-}
+};
 
 const formatSign = (value: number, variable: string) => {
   if (value === 0) return "";
   return value > 0 ? ` + ${value}${variable}` : ` - ${Math.abs(value)}${variable}`;
 };
 
-const CubicEquation = ({ a, b, c, d }: CubicEquationProps) => {  const getEquationString = () => {
+export const CubicEquation = ({ a, b, c, d }: CubicEquationProps) => {
+  const getEquationString = () => {
     if (a === 0) return "give a cubic equation ";
     let eq = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
     eq = eq.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");
@@ -22,6 +23,4 @@ const CubicEquation = ({ a, b, c, d }: CubicEquationProps) => {  const getEquati
       <h2 className="m-0 text-[#344966] font-semibold">{getEquationString()}</h2>
     </div>
   );
-}
-
-export default CubicEquation;
+};
