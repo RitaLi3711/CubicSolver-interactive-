@@ -91,5 +91,12 @@ export const CubicGraph = ({ a, b, c, d, roots }: CubicGraphProps) => {
     drawFunction();
   }, [a, b, c, d, roots]);
 
-  return <canvas ref={canvasRef} width="600" height="400" className="block bg-[#f9f9f9] border-3 border-[#15293a] rounded-[10px]" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      width="600"
+      height="400"
+      className="block bg-[#f9f9f9] border-3 border-[#15293a] rounded-[10px]"
+    />
+  );
 };

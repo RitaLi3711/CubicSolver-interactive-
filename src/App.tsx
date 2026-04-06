@@ -8,7 +8,11 @@ import { CubicEquation } from "./components/CubicEquation";
 const trigMethod = (p: number, q: number, translation: number) => {
   const k = 2 * Math.sqrt(-p / 3);
   const theta = Math.acos(-q / (2 * Math.sqrt(Math.pow(-p / 3, 3)))) / 3;
-  return [k * Math.cos(theta) + translation, k * Math.cos(theta + (2 * Math.PI) / 3) + translation, k * Math.cos(theta + (4 * Math.PI) / 3) + translation];
+  return [
+    k * Math.cos(theta) + translation,
+    k * Math.cos(theta + (2 * Math.PI) / 3) + translation,
+    k * Math.cos(theta + (4 * Math.PI) / 3) + translation,
+  ];
 };
 
 const cardanoMethod = (p: number, q: number, translation: number) => {
@@ -43,19 +47,55 @@ const formatRoot = (r: number | string) => {
   return "complex";
 };
 
+const getMinMaxPoints = (a: number, b: number, c: number, d: number) => {
+  if (a === 0) return null;
+
+  const A = 3 * a;
+  const B = 2 * b;
+  const C = c;
+
+  const discriminant = B * B - 4 * A * C;
+
+  if (discriminant < 0) return null;
+
+  const sqrtDisc = Math.sqrt(discriminant);
+  const x1 = (-B + sqrtDisc) / (2 * A); // Right point
+  const x2 = (-B - sqrtDisc) / (2 * A); // Left point
+
+  const y1 = a * Math.pow(x1, 3) + b * Math.pow(x1, 2) + c * x1 + d;
+  const y2 = a * Math.pow(x2, 3) + b * Math.pow(x2, 2) + c * x2 + d;
+
+  // For a > 0: left point (x2) is MAX, right point (x1) is MIN
+  if (a > 0) {
+    return {
+      max: { x: x2.toFixed(4), y: y2.toFixed(4) }, // Left = Maximum (peak)
+      min: { x: x1.toFixed(4), y: y1.toFixed(4) }, // Right = Minimum (valley)
+    };
+  } else {
+    return {
+      max: { x: x1.toFixed(4), y: y1.toFixed(4) }, // Opposite for a < 0
+      min: { x: x2.toFixed(4), y: y2.toFixed(4) },
+    };
+  }
+};
+
 export const App = () => {
   const [a, setA] = useState(0);
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
   const [d, setD] = useState(0);
-  
+
   const [pValue, setPValue] = useState("");
   const [qValue, setQValue] = useState("");
   const [discValue, setDiscValue] = useState("");
   const [roots, setRoots] = useState<string[]>(["0", "0", "0"]);
-  
-  const [savedEquations, setSavedEquations] = useState<Array<{a: number; b: number; c: number; d: number}>>([]);
-    
+  const [minMaxPoints, setMinMaxPoints] = useState<{
+    max: { x: string; y: string };
+    min: { x: string; y: string };
+  } | null>(null);
+
+  const [savedEquations, setSavedEquations] = useState<Array<{ a: number; b: number; c: number; d: number }>>([]);
+
   const loadEquation = (loadedA: number, loadedB: number, loadedC: number, loadedD: number) => {
     setA(loadedA);
     setB(loadedB);
@@ -69,6 +109,7 @@ export const App = () => {
       setQValue("");
       setDiscValue("");
       setRoots(["", "", ""]);
+      setMinMaxPoints(null);
       return;
     }
 
@@ -84,6 +125,8 @@ export const App = () => {
     const calculatedRoots = getRoots(discriminant, p, q, translation);
     const formattedRoots = calculatedRoots.map((root) => formatRoot(root));
     setRoots(formattedRoots);
+
+    setMinMaxPoints(getMinMaxPoints(a, b, c, d));
   };
 
   useEffect(() => {
@@ -101,26 +144,33 @@ export const App = () => {
         Cubic Solver
       </h1>
 
-      <CubicInput 
-        a={a} b={b} c={c} d={d} 
-        onAChange={setA} onBChange={setB} onCChange={setC} onDChange={setD}
+      <CubicInput
+        a={a}
+        b={b}
+        c={c}
+        d={d}
+        onAChange={setA}
+        onBChange={setB}
+        onCChange={setC}
+        onDChange={setD}
         onSave={saveEquation}
       />
 
       <CubicEquation a={a} b={b} c={c} d={d} />
 
-      <div className="flex justify-center items-start gap-[30px] my-[30px] mx-auto max-w-[1200px] p-5">
-        <CubicTable 
-          pValue={pValue} 
-          qValue={qValue} 
-          discValue={discValue} 
-          root1Value={roots[0]} 
-          root2Value={roots[1]} 
-          root3Value={roots[2]} 
+      <div className="flex justify-center items-center gap-[30px] my-[30px] mx-auto max-w-[1200px]">
+        <CubicTable
+          pValue={pValue}
+          qValue={qValue}
+          discValue={discValue}
+          root1Value={roots[0]}
+          root2Value={roots[1]}
+          root3Value={roots[2]}
+          minMaxPoints={minMaxPoints}
         />
         <CubicGraph a={a} b={b} c={c} d={d} roots={roots} />
       </div>
-      
+
       <CubicHistory savedEquations={savedEquations} onLoad={loadEquation} />
     </div>
   );

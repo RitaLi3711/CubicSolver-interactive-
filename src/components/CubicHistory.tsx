@@ -1,5 +1,5 @@
 type CubicHistoryProps = {
-  savedEquations: Array<{a: number; b: number; c: number; d: number}>;
+  savedEquations: Array<{ a: number; b: number; c: number; d: number }>;
   onLoad: (a: number, b: number, c: number, d: number) => void;
 };
 

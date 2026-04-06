@@ -61,7 +61,7 @@ export const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDCha
         />
       </div>
 
-      <button 
+      <button
         onClick={onSave}
         className="bg-[#bfcc94] text-[#0d1821] font-inherit font-bold leading-[1.3] m-[3px] h-10 mt-10 self-start px-8 pt-2 pb-4 border-none rounded-[20px] hover:bg-[#e6aace]"
       >
