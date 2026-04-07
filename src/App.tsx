@@ -64,15 +64,15 @@ const getMinMaxPoints = (a: number, b: number, c: number, d: number) => {
   const y1 = a * Math.pow(x1, 3) + b * Math.pow(x1, 2) + c * x1 + d;
   const y2 = a * Math.pow(x2, 3) + b * Math.pow(x2, 2) + c * x2 + d;
 
-  if (a > 0) {
-    return {
-      max: { x: x2.toFixed(4), y: y2.toFixed(4) },
-      min: { x: x1.toFixed(4), y: y1.toFixed(4) },
-    };
-  } else {
+  if (y1 > y2) {
     return {
       max: { x: x1.toFixed(4), y: y1.toFixed(4) },
       min: { x: x2.toFixed(4), y: y2.toFixed(4) },
+    };
+  } else {
+    return {
+      max: { x: x2.toFixed(4), y: y2.toFixed(4) },
+      min: { x: x1.toFixed(4), y: y1.toFixed(4) },
     };
   }
 };
