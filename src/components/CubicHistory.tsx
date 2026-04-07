@@ -1,7 +1,4 @@
-type CubicHistoryProps = {
-  savedEquations: Array<{ a: number; b: number; c: number; d: number }>;
-  onLoad: (a: number, b: number, c: number, d: number) => void;
-};
+import type { CubicHistoryProps } from '../types';
 
 export const CubicHistory = ({ savedEquations, onLoad }: CubicHistoryProps) => {
   return (

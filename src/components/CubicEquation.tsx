@@ -1,9 +1,4 @@
-type CubicEquationProps = {
-  a: number;
-  b: number;
-  c: number;
-  d: number;
-};
+import type { CubicEquationProps } from '../types';
 
 const formatSign = (value: number, variable: string) => {
   if (value === 0) return "";

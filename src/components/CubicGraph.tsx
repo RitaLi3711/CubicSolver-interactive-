@@ -1,12 +1,5 @@
 import { useRef, useEffect } from "react";
-
-type CubicGraphProps = {
-  a: number;
-  b: number;
-  c: number;
-  d: number;
-  roots: string[];
-};
+import type { CubicGraphProps } from '../types';
 
 export const CubicGraph = ({ a, b, c, d, roots }: CubicGraphProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);

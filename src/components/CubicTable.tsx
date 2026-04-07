@@ -1,12 +1,4 @@
-type CubicTableProps = {
-  pValue: string;
-  qValue: string;
-  discValue: string;
-  root1Value: string;
-  root2Value: string;
-  root3Value: string;
-  minMaxPoints: { max: { x: string; y: string }; min: { x: string; y: string } } | null;
-};
+import type { CubicTableProps } from '../types';
 
 export const CubicTable = ({
   pValue,

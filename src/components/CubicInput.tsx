@@ -1,14 +1,4 @@
-type CubicInputProps = {
-  a: number;
-  b: number;
-  c: number;
-  d: number;
-  onAChange: (value: number) => void;
-  onBChange: (value: number) => void;
-  onCChange: (value: number) => void;
-  onDChange: (value: number) => void;
-  onSave: () => void;
-};
+import type { CubicInputProps } from '../types';
 
 export const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDChange, onSave }: CubicInputProps) => {
   return (
