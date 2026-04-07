@@ -50,16 +50,16 @@ const formatRoot = (r: number | string) => {
 const getMinMaxPoints = (a: number, b: number, c: number, d: number) => {
   if (a === 0) return null;
 
-  const A = 3 * a;
-  const B = 2 * b;
-  const C = c;
-  const discriminant = B * B - 4 * A * C;
+  const newA = 3 * a;
+  const newB = 2 * b;
+  const newC = c;
+  const discriminant = newB * newB - 4 * newA * newC;
 
   if (discriminant < 0) return null;
 
   const sqrtDisc = Math.sqrt(discriminant);
-  const x1 = (-B + sqrtDisc) / (2 * A);
-  const x2 = (-B - sqrtDisc) / (2 * A);
+  const x1 = (-newB + sqrtDisc) / (2 * newA);
+  const x2 = (-newB - sqrtDisc) / (2 * newA);
 
   const y1 = a * Math.pow(x1, 3) + b * Math.pow(x1, 2) + c * x1 + d;
   const y2 = a * Math.pow(x2, 3) + b * Math.pow(x2, 2) + c * x2 + d;
