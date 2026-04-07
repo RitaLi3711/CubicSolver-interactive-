@@ -37,7 +37,7 @@ const getRoots = (discriminant: number, p: number, q: number, translation: numbe
     } else {
       const r1 = Math.cbrt(q / 2);
       const r2 = -2 * r1;
-      return [r1 + translation, r2 + translation, r2 + translation];
+      return [r1 + translation, r1 + translation, r2 + translation];
     }
   }
 };
