@@ -53,27 +53,25 @@ const getMinMaxPoints = (a: number, b: number, c: number, d: number) => {
   const A = 3 * a;
   const B = 2 * b;
   const C = c;
-
   const discriminant = B * B - 4 * A * C;
 
   if (discriminant < 0) return null;
 
   const sqrtDisc = Math.sqrt(discriminant);
-  const x1 = (-B + sqrtDisc) / (2 * A); // Right point
-  const x2 = (-B - sqrtDisc) / (2 * A); // Left point
+  const x1 = (-B + sqrtDisc) / (2 * A);
+  const x2 = (-B - sqrtDisc) / (2 * A);
 
   const y1 = a * Math.pow(x1, 3) + b * Math.pow(x1, 2) + c * x1 + d;
   const y2 = a * Math.pow(x2, 3) + b * Math.pow(x2, 2) + c * x2 + d;
 
-  // For a > 0: left point (x2) is MAX, right point (x1) is MIN
   if (a > 0) {
     return {
-      max: { x: x2.toFixed(4), y: y2.toFixed(4) }, // Left = Maximum (peak)
-      min: { x: x1.toFixed(4), y: y1.toFixed(4) }, // Right = Minimum (valley)
+      max: { x: x2.toFixed(4), y: y2.toFixed(4) },
+      min: { x: x1.toFixed(4), y: y1.toFixed(4) },
     };
   } else {
     return {
-      max: { x: x1.toFixed(4), y: y1.toFixed(4) }, // Opposite for a < 0
+      max: { x: x1.toFixed(4), y: y1.toFixed(4) },
       min: { x: x2.toFixed(4), y: y2.toFixed(4) },
     };
   }
@@ -93,7 +91,6 @@ export const App = () => {
     max: { x: string; y: string };
     min: { x: string; y: string };
   } | null>(null);
-
   const [savedEquations, setSavedEquations] = useState<Array<{ a: number; b: number; c: number; d: number }>>([]);
 
   const loadEquation = (loadedA: number, loadedB: number, loadedC: number, loadedD: number) => {
@@ -125,7 +122,6 @@ export const App = () => {
     const calculatedRoots = getRoots(discriminant, p, q, translation);
     const formattedRoots = calculatedRoots.map((root) => formatRoot(root));
     setRoots(formattedRoots);
-
     setMinMaxPoints(getMinMaxPoints(a, b, c, d));
   };
 

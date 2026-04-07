@@ -13,9 +13,9 @@ const formatSign = (value: number, variable: string) => {
 export const CubicEquation = ({ a, b, c, d }: CubicEquationProps) => {
   const getEquationString = () => {
     if (a === 0) return "give a cubic equation ";
-    let eq = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
-    eq = eq.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");
-    return eq;
+    let equation = `${a}x³${formatSign(b, "x²")}${formatSign(c, "x")}${formatSign(d, "")} = 0`;
+    equation = equation.replace(/\+ -/g, "- ").replace(/^\s\+\s/, "");
+    return equation;
   };
 
   return (

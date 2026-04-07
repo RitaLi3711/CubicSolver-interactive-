@@ -19,7 +19,7 @@ export const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDCha
           type="number"
           step="any"
           value={a === 0 ? "" : a}
-          onChange={(e) => onAChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
+          onChange={(event) => onAChange(event.target.value === "" ? 0 : parseFloat(event.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
           placeholder="0"
         />
@@ -31,7 +31,7 @@ export const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDCha
           type="number"
           step="any"
           value={b === 0 ? "" : b}
-          onChange={(e) => onBChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
+          onChange={(event) => onBChange(event.target.value === "" ? 0 : parseFloat(event.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
           placeholder="0"
         />
@@ -43,7 +43,7 @@ export const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDCha
           type="number"
           step="any"
           value={c === 0 ? "" : c}
-          onChange={(e) => onCChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
+          onChange={(event) => onCChange(event.target.value === "" ? 0 : parseFloat(event.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
           placeholder="0"
         />
@@ -55,7 +55,7 @@ export const CubicInput = ({ a, b, c, d, onAChange, onBChange, onCChange, onDCha
           type="number"
           step="any"
           value={d === 0 ? "" : d}
-          onChange={(e) => onDChange(e.target.value === "" ? 0 : parseFloat(e.target.value))}
+          onChange={(event) => onDChange(event.target.value === "" ? 0 : parseFloat(event.target.value))}
           className="w-20 text-center indent-[15px] p-3 border-2 border-[#e6aace] rounded-[20px] font-inherit bg-white"
           placeholder="0"
         />
