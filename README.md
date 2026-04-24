@@ -1,4 +1,4 @@
-link: [incredible-gumdrop-1cf1bd.netlify.app]
+link: [cubicsolver.netlify.app]
 
 # React + TypeScript + Vite
 
